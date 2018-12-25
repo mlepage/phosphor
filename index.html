@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id='canvas' width='720' height='480'></canvas>
+
+<!-- https://pixelsvsbytes.com/2013/02/js-require-for-browsers-better-faster-stronger/ -->
+<script src='require.min.js'></script>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const Phosphor = Tarp.require('./phosphor.js');
+  const phosphor = new Phosphor(canvas);
+</script>
+
+<p>Looking for the <a href="../phosphor-old/">old version</a>?</p>
+
+<p>The old version has graphics and nice editors, but is effectively a prototype.</p>
+
+<p>This new version has much stronger foundations, but it's still catching up in features, so please have patience and check back regularly.</p>
+
+<p>Notable new features: 240x160 res, 64 colours, 60 fps, new font, and file system APIs.</p>
+
+<p>Coming soon: more I/O improvements, and editor enhancements. Eventually, graphics.</p>
+
+</body>
+</html>
