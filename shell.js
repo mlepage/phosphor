@@ -7,6 +7,7 @@ const helptext =
 `\x1bBhelp         \x1bAshow list of commands
 \x1bBhelp \x1bCcmd     \x1bAshow help for command
 \x1bBclear        \x1bAclear terminal
+\x1bBfullscreen   \x1bAtoggle fullscreen
 \x1bBlist         \x1bAlist files
 \x1bBload \x1bCname    \x1bAload named file
 \x1bBrun          \x1bArun loaded file
@@ -151,19 +152,30 @@ module.exports = class Shell {
   }
 
   async builtin_export(...args) {
-    // TODO
+    this.P.write(1, '\x1bCnot yet implemented\x1bA\n');
+  }
+
+  async builtin_fullscreen(...args) {
+    this.P.fullscreen();
   }
 
   async builtin_help(...args) {
-    this.P.write(1, helptext);
+    const P = this.P;
+    args.shift();
+    if (args.length != 0) {
+      P.write(1, args.length == 1 ? '\x1bCnot yet implemented\x1bA\n'
+                                  : '\x1bCtoo many commands specified\x1bA\n');
+      return;
+    }
+    P.write(1, helptext);
   }
 
   async builtin_import(...args) {
-    // TODO
+    this.P.write(1, '\x1bCnot yet implemented\x1bA\n');
   }
 
   async builtin_info(...args) {
-    // TODO
+    this.P.write(1, '\x1bCnot yet implemented\x1bA\n');
   }
 
   async builtin_list(...args) {
@@ -313,9 +325,10 @@ module.exports = class Shell {
     return P.spawn('lua', 'test.lua', ...args)._.main_promise;
   }
 
-  async builtin_testfont() {
+  async builtin_testfont(...args) {
     const P = this.P;
-    const n = Math.floor(Math.random()*4);
+    args.shift();
+    const n = args.length > 0 ? Number(args[0]) : Math.floor(Math.random()*4);
     switch (n) {
       case 0:
         P.write(1, '\x1bAwhite  \x1bBgreen  \x1bCamber  \x1bDred  \x1bA\n');

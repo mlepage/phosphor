@@ -407,6 +407,7 @@ module.exports = class Phosphor {
     canvas.addEventListener('keydown', (e) => {
       if (e.key == 'Escape') {
         system.vc(current == vc_table[0] ? esc_vc : 0);
+        e.preventDefault();
         return;
       } else if (e.ctrlKey) {
         if (e.altKey) {
@@ -496,10 +497,18 @@ module.exports = class Phosphor {
       delete storage[`P/${name}`];
       delete storage[`P:${inode}`];
       return 0;
-};
+    };
     
     system.error = function() {
       return error;
+    };
+    
+    system.fullscreen = function() {
+      if (document.webkitFullscreenElement) {
+        document.webkitExitFullscreen();
+      } else {
+        canvas.webkitRequestFullscreen();
+      }
     };
     
     // load() --> returns loaded name (could be untitled)

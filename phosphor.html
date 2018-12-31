@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Phosphor</title>
+<style>
+  body {
+    background-color: green;
+    border: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+</style>
+</head>
+<body>
+
+<canvas id='canvas' width='720' height='480'></canvas>
+
+<!-- https://pixelsvsbytes.com/2013/02/js-require-for-browsers-better-faster-stronger/ -->
+<script src='require.min.js'></script>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const Phosphor = Tarp.require('./phosphor.js');
+  const phosphor = new Phosphor(canvas);
+</script>
+
+</body>
+</html>
